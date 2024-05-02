@@ -49,6 +49,40 @@ Reference labels: support ligatures (equivalent according to unicode case foldin
 <p><a href="/url">ﬀﬁﬂ</a></p>
 .
 
+Reference can be interrupted by other rules
+.
+[foo]: /url 'title
+ - - -
+'
+
+[foo]
+.
+<p>[foo]: /url 'title</p>
+<hr>
+<p>’</p>
+<p>[foo]</p>
+.
+
+Escape character in link reference title doesn't escape newlines
+.
+[foo]: /url "
+hello
+\
+\
+\
+world
+"
+
+[foo]
+.
+<p><a href="/url" title="
+hello
+\
+\
+\
+world
+">foo</a></p>
+.
 
 Issue #35. `<` should work as punctuation
 .
@@ -682,11 +716,27 @@ Issue #772. Header rule should not interfere with html tags.
 </pre>
 .
 
-Newline in image description
+Softbreak in image description
 .
 There is a newline in this image ![here
 it is](https://github.com/executablebooks/)
 .
 <p>There is a newline in this image <img src="https://github.com/executablebooks/" alt="here
 it is"></p>
+.
+
+Hardbreak in image description
+.
+There is a newline in this image ![here\
+it is](https://github.com/executablebooks/)
+.
+<p>There is a newline in this image <img src="https://github.com/executablebooks/" alt="here
+it is"></p>
+.
+
+Html in image description
+.
+![text <textarea> text](image.png)
+.
+<p><img src="image.png" alt="text &lt;textarea&gt; text"></p>
 .
